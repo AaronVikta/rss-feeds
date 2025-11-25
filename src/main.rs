@@ -35,7 +35,7 @@ async fn main()->Result<(), Box<dyn std::error::Error>> {
 
     match cli.command{
         Actions::Add { url }=>{
-            println!("Adding RSS feed: {}", url);
+            add_feed(&url).await?;
         }
         Actions::Fetch { url ,limit} =>{
             
@@ -89,5 +89,23 @@ async fn get_feeds(url: &str,limit:usize)-> Result<(),Box<dyn Error>>{
         println!();
     }
 
+    Ok(())
+}
+
+
+async fn add_feed(url:&str)->Result<(), Box<dyn Error>>{
+    //validate  the  URL format
+    if !url.starts_with("http://") && !url.starts_with("https://"){
+        return Err("Invalid URL: must start with http:// or https://".into());
+    } 
+    //Test if the URL is accessible
+    let response = reqwest::get(url).await?;
+
+    if !response.status().is_success(){
+        return Err(format!("Failed to access RSS feed: HTTP {}", response.status()).into());
+    }
+
+    println!("Successfully added RSS feed: {}", url);
+    //Store URL in database or file #TODO
     Ok(())
 }

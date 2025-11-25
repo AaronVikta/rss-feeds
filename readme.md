@@ -1,28 +1,28 @@
-## RSS CLI
+# RSS CLI
 A simple command-line RSS feed reader written in Rust.
 
 # Installation
 cargo build --release
 
 
-## Usage
+# Usage
 
-# Add a feed
+## Add a feed
 cargo run -- add --url "https://news.ycombinator.com/rss"
 
-# Fetch and display feed
+## Fetch and display feed
 
-# Fetch 5 items (default)
+## Fetch 5 items (default)
 cargo run -- fetch --url "https://news.ycombinator.com/rss"
 
-# Fetch 10 items
+## Fetch 10 items
 cargo run -- fetch --url "https://blog.rust-lang.org/feed.xml" --limit 10
 
 
-# Read a specific item
+## Read a specific item
 cargo run -- read --id 1
 
-# Example Feeds
+## Example Feeds
 - Hacker News: https://news.ycombinator.com/rss
 - Rust Blog: https://blog.rust-lang.org/feed.xml
 - BBC News: http://feeds.bbci.co.uk/news/rss.xml

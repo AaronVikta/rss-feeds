@@ -42,7 +42,7 @@ async fn main()->Result<(), Box<dyn std::error::Error>> {
             get_feeds(&url,limit).await?;
         }
         Actions::Read { id }=>{
-            println!("Reading RSS feed with ID: {}", id);
+            read_feed(id).await?;
         }
     }
     
@@ -107,5 +107,12 @@ async fn add_feed(url:&str)->Result<(), Box<dyn Error>>{
 
     println!("Successfully added RSS feed: {}", url);
     //Store URL in database or file #TODO
+    Ok(())
+}
+
+async fn read_feed(id:usize)->Result<(), Box<dyn Error>>{
+
+    println!("Reading RSS feed with ID: {}",id);
+    //Fetch and display feed from database or file #TODO
     Ok(())
 }
